@@ -5,10 +5,10 @@ import java.util.Map;
 public class Solution {
     public static void main(String[] args) {
         System.out.println("Hello World");
-        int[] nums = new int[]{2,7,11,15};
-        int target = 9;
+        int[] nums = new int[]{3,2,4};
+        int target = 6;
         Solution sum = new Solution();
-        System.out.println("{i, j} = " + Arrays.toString(sum.twoSumV1(nums, target)));
+        System.out.println("{i, j} = " + Arrays.toString(sum.twoSumV2(nums, target)));
     }
 
     public int[] twoSum(int[] nums, int target) {
@@ -33,4 +33,16 @@ public class Solution {
         }
         return  null;
     }
+
+    public int[] twoSumV2(int[] nums, int target){
+        Map<Integer, Integer> lookupTable = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int extra = target - nums[i];
+            if(lookupTable.containsKey(extra) && lookupTable.get(extra) != i){
+                return new int[]{lookupTable.get(extra), i};
+            }
+            lookupTable.put(nums[i], i);
+        }
+        return null;
+     }
 }
